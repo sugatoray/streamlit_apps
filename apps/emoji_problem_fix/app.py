@@ -55,7 +55,7 @@ use `markdown` block directly
 '''
 
 st.warning('''
-- use **`emoji`** library:
+- use **`emoji`** library: https://github.com/carpedm20/emoji
 
   | Method of Installation |               Command                |
   |:----------------------:|:------------------------------------:|
