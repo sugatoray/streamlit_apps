@@ -3,7 +3,8 @@ import emoji
 
 st.set_page_config(layout="wide")
 
-st.title("**Streamlit** Has an **Emoji Problem** :fire:: _**I have a fix**_ :+1::zap:")
+title_text = "**Streamlit** Has an **Emoji Problem** :fire:: _**I have a fix**_ :+1::zap:"
+st.title(title_text)
 
 st.write('> Author: Sugato Ray | Social: [github](https://github.com/sugatoray)')
 
@@ -89,3 +90,15 @@ st.write(f'> Try this out `:green_circle:`: {green_circle}')
 Copyright: Sugato Ray, 2021
 
 '''
+
+with st.sidebar:
+
+    st.write(f"""
+    [{title_text}][#title]
+
+    [#title]: #streamlit-has-an-emoji-problem-i-have-a-fix
+
+    - [Any alternatives?](#any-alternatives)
+    - [**So what is the fix?** :zap:](#so-what-is-the-fix)
+    """)
+
