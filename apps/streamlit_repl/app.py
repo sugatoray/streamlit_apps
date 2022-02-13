@@ -41,7 +41,12 @@ toolbar = int(options.get("toolbar", Defaults.ShowToolbar))
 kernel = str(options.get("language", Defaults.DefaultLanguage)).lower()
 theme = options.get("theme", Defaults.DefaultReplTheme)
 
-iframeurl = f"https://replite.vercel.app/retro/consoles/?toolbar={toolbar}&kernel={kernel}&theme={theme}"
+iframeurl = U.prepare_url(
+    base="https://replite.vercel.app/retro/consoles/",
+    params=dict(toolbar=toolbar, kernel=kernel, theme=theme)
+)
+
+# iframeurl = f"https://replite.vercel.app/retro/consoles/?toolbar={toolbar}&kernel={kernel}&theme={theme}"
 
 st.success(dedent("""### Enjoy the REPL! 🎈🎉
 
@@ -105,7 +110,8 @@ with st.expander(label="Click to see more", expanded=False):
 
     st.warning("#### URL Used")
     st.write(dedent(f"""
-    **`replite` app url**: {iframeurl}
+    **`replite` app url**:
+    > {iframeurl}
     """))
 
 st.components.v1.iframe(iframeurl, height=500, scrolling=True)

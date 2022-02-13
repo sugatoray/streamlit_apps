@@ -1,4 +1,5 @@
 import streamlit as st
+import urllib
 from dataclasses import dataclass
 from typing import List, Tuple
 from textwrap import dedent
@@ -39,3 +40,10 @@ def add_about_section():
         """
         )
     )
+
+
+def prepare_url(base: str, params: Dict):
+    """Return an encoded url."""
+    tail = urllib.parse.urlencode(**params)
+    url = urllib.parse.urljoin(base, tail)
+    return url
