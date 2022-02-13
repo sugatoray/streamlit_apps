@@ -52,7 +52,7 @@ st.success(dedent("""### Enjoy the REPL! 🎈🎉
 st.info("### Installing Python Packages")
 
 with st.expander(label="Click to see more", expanded=False):
-    st.write(dedent("""
+    st.write(dedent('''
     Run the following line in the REPL to install a purely-python library (for example: `genespeak`).
     See [micropip API docs][#micropip-api-docs] for more details.
 
@@ -97,7 +97,7 @@ with st.expander(label="Click to see more", expanded=False):
     await mpinstall("emoji")
     ```
 
-    """)
+    ''')
     )
 
 st.components.v1.iframe(iframeurl, height=500, scrolling=True)
