@@ -65,6 +65,38 @@ with st.expander(label="Click to see more", expanded=False):
     import micropip; await micropip.install("genespeak"); import genespeak as gp; pkg = gp; print(f"{pkg.__name__} version: {pkg.__version__}")
     ```
 
+    or,
+
+    ```python
+    import micropip
+
+    async def mpinstall(libname: str, libspec: str=None):
+        """Installs pure-python libraries using micropip.
+
+        Usage:
+
+            await mpinstall("emoji");
+            await mpinstall("genespeak");
+            await mpinstall("genespeak", libspec="==0.0.8") # this fails for now
+
+        """
+        import micropip
+        import importlib
+        import warnings
+        lib = libname + "" if libspec is None else libspec
+        try:
+            await micropip.install(lib)
+        except Exception as e:
+            msg = f"Exception occured while installing with version specification. Installing latest version of {libname}."
+            warnings.warn(msg)
+            await micropip.install(libname)
+        pkg = importlib.import_module(libname)
+        print(f"{pkg.__name__} version: {pkg.__version__}")
+
+    await mpinstall("genespeak")
+    await mpinstall("emoji")
+    ```
+
     """)
     )
 
