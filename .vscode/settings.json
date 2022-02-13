@@ -1,0 +1,108 @@
+{
+    // Python Environment Variables
+    "python.envFile": "${workspaceFolder}/.env",
+    // Python environment executable path
+    //"python.condaPath": "${env:PYTHON_INSTALL_LOC}",
+    "python.defaultInterpreterPath": "${env:HOME}/miniconda3/envs/docs_env/bin/python",
+    "python.terminal.activateEnvironment": true,
+    // OpenSCAD executable path
+    /*
+        - /snap/bin/openscad
+        - "C:\\Program Files\\OpenSCAD\\openscad.exe"
+    */
+    "openscad.launchPath": "/snap/bin/openscad",
+    // Editor and Window Settings
+    "window.zoomLevel": 0,
+    //"workbench.colorTheme": "Monokai",
+    "workbench.settings.editor": "json",
+    "workbench.settings.openDefaultSettings": true,
+    "editor.fontFamily": "Consolas, 'Courier New', monospace",
+    //"terminal.integrated.fontFamily": "monospace", //"DejaVu Sans Mono for Powerline",
+    // Markdown Lint Settings
+    "markdownlint.config": {
+        "default": true,
+        "MD033": false, //no-inline-html
+        "MD036": false, //no-emphasis-as-heading
+        "MD026": false, //no-trailing-punctuation
+        "MD034": false, //no-bare-urls
+        "MD025": false, //single-title/single-h1
+        "MD009": false, //no-trailing-spaces
+        "MD040": false, //fenced-code-language
+        "MD024": false, //no-duplicate-heading/no-duplicate-header
+        "MD014": false, //commands-show-output: Dollar signs used before commands without showing output
+    },
+    "markdownlint.ignore": [
+        // "path/to/some/file.md"
+    ],
+    // Markdown PDF Settings
+    "markdown-pdf.outputDirectoryRelativePathFile": true,
+    "markdown-pdf.outputDirectory": "exports",
+    // Instant Markdown Settings
+    "instantmarkdown.autoOpenBrowser": false,
+    // Markdown Extended Settings
+    "markdown.styles": [
+        //"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    ],
+    // OpenJDK Path for "Language Support for Java(TM) by Red Hat" -- redhat.java
+    //"java.home": "C:\\Program Files\\AdoptOpenJDK\\jdk-11.0.6.10-hotspot"
+    // AutoIt Plugin Settings
+    "autoit.consoleParams": "",
+    // Spell-checker settings
+    "cSpell.words": [
+        "Covid",
+        "FTIR",
+        "LACT",
+        "Laminography",
+        "Schofield",
+        "Sinogram",
+        "SmarGon",
+        "Sugato",
+        "binarized",
+        "microloop"
+    ],
+    // *Color Theme*:
+    /*
+        - Settings >> Color theme [Ctrl+K Ctrl+T]
+        - List of Preferred Themes:
+          ! - [1] "Visual Studio Dark",
+          ! - [2] "Monokai",
+          ! - [3] "Material",
+          ? - [ ] "GitHub Dark",
+          ? - [ ] "GitHub Dark Dimmed",
+          ? - [ ] "GitHub Dark Default",
+          ! - [4] "Solarized Dark",
+    */
+    "workbench.colorTheme": "Visual Studio Dark",
+    // *Integrated terminal Font Family*:
+    /*
+        @@ field: "terminal.integrated.fontFamily"
+        _values:
+          ! - [1] "Menlo for Powerline"
+          ! - [2] "DejaVu Sans Mono for Powerline"
+    */
+    "terminal.integrated.fontFamily": "Menlo for Powerline",
+    "colorInfo.fields": [
+        "hex",
+        "rgb",
+        "hsl",
+        "hsv",
+        "lab",
+        "lch",
+        "alpha",
+        "cmyk",
+        "css-color-name",
+        "preview-square",
+        //"preview",
+        //"preview-square-xl",
+        //"preview-xl"
+    ],
+
+    // Autoreplies for the Integrated Terminal
+    "terminal.integrated.autoReplies": {
+        "[Oh My Zsh] Would you like to check for updates? [Y/n]": "Y\r", // To disable, use: null
+    },
+
+    // Julia Language Executable Path
+    "julia.executablePath": "${env:HOME}/.local/bin/julia",
+}
+
