@@ -103,7 +103,8 @@ with st.expander(label="Click to see more", expanded=False):
     ''')
     )
 
-    st.warning(dedent(f"""#### URL Used
+    st.warning("#### URL Used")
+    st.write(dedent(f"""
     **`replite` app url**: {iframeurl}
     """))
 
