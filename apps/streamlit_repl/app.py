@@ -104,8 +104,7 @@ with st.expander(label="Click to see more", expanded=False):
     )
 
     st.warning(dedent(f"""#### URL Used
-
-    - `replite` app url: {iframeurl}
+    **`replite` app url**: {iframeurl}
     """))
 
 st.components.v1.iframe(iframeurl, height=500, scrolling=True)
