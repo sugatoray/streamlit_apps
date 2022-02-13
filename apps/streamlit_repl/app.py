@@ -5,7 +5,7 @@ import utils as U
 
 Defaults = U.Defaults
 
-st.write("# Streamlit REPL ✨")
+st.write("# Streamlit Python REPL ✨")
 
 st.write("""
 Made with :heart: using `replite`: &nbsp; *An embeddable REPL, powered by JupyterLite.*
