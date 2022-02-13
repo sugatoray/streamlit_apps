@@ -46,6 +46,19 @@ iframeurl = f"https://replite.vercel.app/retro/consoles/?toolbar={toolbar}&kerne
 st.success(dedent("""### Enjoy the REPL! 🎈🎉
 
 > GitHub: https://github.com/jtpio/replite
+
+Run the following line in the REPL to install a purely-python library (for example: `genespeak`).
+See [micropip API docs][#micropip-api-docs] for more details.
+
+- [Creating a Pyodide Package](https://pyodide.org/en/stable/development/new-packages.html#creating-a-pyodide-package)
+- [Pyodide Package Recipe: `meta.yaml` file](https://pyodide.org/en/stable/development/meta-yaml.html)
+
+[#micropip-api-docs]: https://pyodide.org/en/stable/usage/api/micropip-api.html
+
+```python
+import micropip; await micropip.install("genespeak"); import genespeak as gp; pkg = gp; print(f"{pkg.__name__} version: {pkg.__version__}")
+```
+
 """))
 
 st.components.v1.iframe(iframeurl, height=500, scrolling=True)
