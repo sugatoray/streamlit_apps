@@ -68,8 +68,11 @@ with st.expander(label="Click to see more", expanded=False):
     or,
 
     ```python
-    import micropip
+    import micropip; await micropip.install("genespeak")
+    ```
+    or,
 
+    ```python
     async def mpinstall(libname: str, libspec: str=None):
         """Installs pure-python libraries using micropip.
 
