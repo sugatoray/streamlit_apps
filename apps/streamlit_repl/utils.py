@@ -1,7 +1,7 @@
 import streamlit as st
 import urllib
 from dataclasses import dataclass
-from typing import List, Tuple
+from typing import List, Tuple, Dict
 from textwrap import dedent
 
 
