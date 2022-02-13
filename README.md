@@ -8,5 +8,5 @@ A collection of my streamlit apps.
 
 <!--- Define Links: Begin --->
 [#streamlit-repl-app]: https://share.streamlit.io/sugatoray/streamlit_apps/master/apps/streamlit_repl/app.py
-[#code-streamlit-repl-app]: https://github.com/sugatoray/streamlit_apps/master/apps/streamlit_repl/app.py
+[#code-streamlit-repl-app]: https://github.com/sugatoray/streamlit_apps/blob/master/apps/streamlit_repl/app.py
 <!--- Define Links: End --->
