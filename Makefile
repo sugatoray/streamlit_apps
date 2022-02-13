@@ -24,6 +24,8 @@ streamlit_run:
 	streamlit run $(STREAMLIT_DEMO_APP) --server.port=$(ALT_STREAMLIT_PORT) &
 
 strun:
+	# Example Usage:
+	# $ make strun APP_NAME=streamlit_repl
 	$(eval STREAMLIT_PORT := $(shell if [ -z $(STREAMLIT_PORT) ]; then echo 8051; else echo $(STREAMLIT_PORT); fi))
 	@echo STREAMLIT_PORT is: [$(STREAMLIT_PORT)]
 	streamlit run ./apps/$(APP_NAME)/app.py --server.port=$(STREAMLIT_PORT)
