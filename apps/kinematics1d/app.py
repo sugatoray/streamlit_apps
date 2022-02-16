@@ -50,6 +50,10 @@ with st.sidebar:
         help="Average velocity in m/s",
     )
 
+    st.write("---")
+
+    U.add_about_section()
+
 # with st.expander("Input Parameters", expanded=False):
 #     st.json(options)
 

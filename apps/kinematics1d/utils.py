@@ -8,14 +8,6 @@ from textwrap import dedent
 @st.cache
 @dataclass
 class Defaults:
-    ShowToolbar: bool = True
-    LanguageOptions: Tuple[str] = ("Julia", "Python", "R",) # type: ignore
-    DefaultLanguage: str = "Python"
-    ReplThemeOptions: Tuple[str] = (
-        "JupyterLab Light",
-        "JupyterLab Dark",
-    )  # type: ignore
-    DefaultReplTheme: str = "JupyterLab Light"
     APP_URL: str = r"https://share.streamlit.io/sugatoray/streamlit_apps/master/apps/kinematics1d/app.py"
     APP_URL_SHORT: str = r"https://tinyurl.com/st-kinematics1d-demo"
 
