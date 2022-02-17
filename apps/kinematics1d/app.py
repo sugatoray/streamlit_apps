@@ -7,6 +7,10 @@ Defaults = U.Defaults
 
 st.write("# Kinematics 1D ✨")
 
+with st.container():
+    st.markdown("> *Accelerate your learning of kinematics 1D concepts.* 📈 ⚡")
+    U.app_introduction()
+
 with st.sidebar:
     st.write("## ⚙️ Parameters")
 

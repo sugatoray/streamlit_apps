@@ -114,5 +114,31 @@ def display_result(result: Dict[str, Any], known: Optional[List[str]]=None):
 
     st.write("\n")
 
-    st.warning("#### Parameters as JSON")
+    st.warning("#### Parameters as JSON 📄")
     st.json(result)
+
+def app_introduction():
+    st.write(dedent("""
+    This app helps in evaluating the following parameters for 1D kinematics
+    problems.
+    The app should be used as an educational buddy for accelerated learning
+    of 1D kinematics concepts and their application to problems, where at
+    least ***three*** of the following parameters are known.
+
+    > - Displacement: {label_Dx}
+    > - Acceleration: {label_a}
+    > - Time: {label_t}
+    > - Initial Velocity: {label_vi}
+    > - Final Velocity: {label_vf}
+    > - Average Velocity: {label_vavg}
+
+    """.format(
+            label_Dx=r"$\Delta x$",
+            label_a=r"$a$",
+            label_t=r"$t$",
+            label_vi=r"$v_{i}$",
+            label_vf=r"$v_{f}$",
+            label_vavg=r"$v_{avg}$"
+            )
+        )
+    )
