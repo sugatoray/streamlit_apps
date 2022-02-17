@@ -69,7 +69,7 @@ with st.container():
     try:
         # k1 = K.Kinematics1D(vi=205, vf=315, t=10.0)
         k1 = K.Kinematics1D(**params)
-        result, steps = k1.solve(steps_params=dict(debug=bool(Defaults.USE_DEBUG_MODE)))
+        result, steps = k1.solve(steps_params=dict(debug=Defaults.USE_DEBUG_MODE))
 
         with st.expander("Evaluated Parameters 🎁", expanded=True):
             U.display_result(result, known = known)
