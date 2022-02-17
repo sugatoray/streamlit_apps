@@ -1,15 +1,28 @@
 import streamlit as st
-import urllib
+import os
 from dataclasses import dataclass
 from typing import List, Tuple, Dict, Any, Optional
 from textwrap import dedent
 
+
+def use_debug_mode(watchvariable: str = "ST_DEBUG_MODE", value: str = "0") -> bool:
+    # Default is False (ST_DEBUG_MODE = "0")
+    return bool(os.environ.get(watchvariable, value) == "1")
+
+
+def is_streamlit_cloud(watchvariable: str = "ST_IS_STREAMLIT_CLOUD") -> bool:
+    """If running in the Streamlit Cloud, set environment variable
+    (the same as ``watchvariable``) to 1.
+    """
+    return bool(os.environ.get(watchvariable, "0") == "1")
 
 @st.cache
 @dataclass
 class Defaults:
     APP_URL: str = r"https://share.streamlit.io/sugatoray/streamlit_apps/master/apps/kinematics1d/app.py"
     APP_URL_SHORT: str = r"https://tinyurl.com/st-kinematics1d-demo"
+    ON_ST_CLOUD: bool = is_streamlit_cloud()
+    USE_DEBUG_MODE: bool = use_debug_mode()
 
 
 def add_about_section():
