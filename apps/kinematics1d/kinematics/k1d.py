@@ -22,8 +22,8 @@ def eval_average_velocity(
         v_avg = 0.5 * (vi + vf)
         formula = r"v_{avg} &= \frac{\left( v_{i} + v_{f} \right)}{2}"
     elif set(using.strip().split(",")) == {"Dx", "t"} and (Dx is not None) and (t is not None):
-        v_avg = 2 * Dx / t
-        formula = r"v_{avg} &= \frac{2 \Delta x}{t}"
+        v_avg = Dx / t
+        formula = r"v_{avg} &= \frac{\Delta x}{t}"
     return dict(value=v_avg, formula=formula)
 
 
@@ -633,6 +633,84 @@ def known_vf_vavg_a(vf: float, v_avg: float, a: float, ndigits: int = 5, reuse: 
         return known_vi_vf_a(vi=vi, vf=vf, a=a, ndigits=ndigits), steps
 
 
+def known_vi_Dx_t(vi: float, Dx: float, t: float, ndigits: int = 5, reuse: bool = False):
+    """Returns average-velocity (v_avg), final-velocity (vf) and acceleration (a).
+
+    Parameters:
+        vi: initial velocity (units: m/s)
+        Dx: displacement (units: m)
+        t : time (units: s)
+
+    Usage:
+
+        result = known_vi_Dx_t(vi=200.0, Dx=3000.0, t=10.0)
+
+    """
+    results = dict()
+    steps = []
+
+    # v_avg = Dx / t
+    results["v_avg"] = eval_average_velocity(Dx=Dx, t=t, using="Dx,t")
+    v_avg = results.get("v_avg", {}).get("value")  # type: ignore
+    steps.append(results.get("v_avg", {}).get("formula"))
+
+    if not reuse:
+
+        # vf = v_avg * 2 - vi
+        results["vf"] = eval_final_velocity(vi=vi, v_avg=v_avg, using="vi,v_avg")
+        vf = results.get("vf", {}).get("value")
+        steps.append(results.get("vf", {}).get("formula"))
+
+        # a = (vf - vi) / t
+        results["a"] = eval_acceleration(vi=vi, vf=vf, t=t)
+        a = results.get("a", {}).get("value")
+        steps.append(results.get("a", {}).get("formula"))
+
+        result = dict(Dx=Dx, a=a, v_avg=v_avg, vi=vi, vf=vf, t=t)
+        return prepare_result(ndigits=ndigits, **result), steps
+    else:
+        return known_vi_vavg_Dx(vi=vi, v_avg=v_avg, Dx=Dx, ndigits=ndigits), steps
+
+
+def known_vf_Dx_t(vf: float, Dx: float, t: float, ndigits: int = 5, reuse: bool = False):
+    """Returns average-velocity (v_avg), initial-velocity (vi) and acceleration (a).
+
+    Parameters:
+        vf: final velocity (units: m/s)
+        Dx: displacement (units: m)
+        t : time (units: s)
+
+    Usage:
+
+        result = known_vf_Dx_t(vf=400.0, Dx=3000.0, t=10.0)
+
+    """
+    results = dict()
+    steps = []
+
+    # v_avg = Dx / t
+    results["v_avg"] = eval_average_velocity(Dx=Dx, t=t, using="Dx,t")
+    v_avg = results.get("v_avg", {}).get("value")  # type: ignore
+    steps.append(results.get("v_avg", {}).get("formula"))
+
+    if not reuse:
+
+        # vi = v_avg * 2 - vf
+        results["vi"] = eval_initial_velocity(vf=vf, v_avg=v_avg, using="vf,v_avg")
+        vi = results.get("vi", {}).get("value")
+        steps.append(results.get("vi", {}).get("formula"))
+
+        # a = (vf - vi) / t
+        results["a"] = eval_acceleration(vi=vi, vf=vf, t=t)
+        a = results.get("a", {}).get("value")
+        steps.append(results.get("a", {}).get("formula"))
+
+        result = dict(Dx=Dx, a=a, v_avg=v_avg, vi=vi, vf=vf, t=t)
+        return prepare_result(ndigits=ndigits, **result), steps
+    else:
+        return known_vf_vavg_Dx(vf=vf, v_avg=v_avg, Dx=Dx, ndigits=ndigits), steps
+
+
 def calculate1D(
     vi:Optional[float]=None,
     vf:Optional[float]=None,
@@ -675,6 +753,10 @@ def calculate1D(
         return known_vi_vavg_Dx(vi=vi, v_avg=v_avg, Dx=Dx, ndigits=ndigits)
     elif {'vf', 'v_avg', 'Dx'} - set(params.keys()) == set():
         return known_vf_vavg_Dx(vf=vf, v_avg=v_avg, Dx=Dx, ndigits=ndigits)
+    elif {'vi', 'Dx', 't'} - set(params.keys()) == set():
+        return known_vi_Dx_t(vi=vi, Dx=Dx, t=t, ndigits=ndigits)
+    elif {'vf', 'Dx', 't'} - set(params.keys()) == set():
+        return known_vf_Dx_t(vf=vf, Dx=Dx, t=t, ndigits=ndigits)
     else:
         raise NotImplementedError()
 
