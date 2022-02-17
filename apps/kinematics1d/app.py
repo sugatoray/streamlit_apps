@@ -25,7 +25,7 @@ with st.sidebar:
         help="Initial velocity in m/s"
     )
     options["vf"] = st.text_input(
-        label="Final Velocity (vj) 👇",
+        label="Final Velocity (vf) 👇",
         value="315",
         placeholder="Null",
         help="Final velocity in m/s",
@@ -58,51 +58,42 @@ with st.sidebar:
 #     st.json(options)
 
 params = dict((k, float(v)) if v else (k, None) for k, v  in options.items())
+known = list(k for k, v in params.items() if v is not None)
 
-with st.expander("Input Parameters", expanded=False):
+st.success("### Parameters ⚙️")
+
+with st.expander("Input Parameters 📥", expanded=False):
     st.json(params)
 
-# k1 = K.Kinematics1D(vi=205, vf=315, t=10.0)
-k1 = K.Kinematics1D(**params)
-result, steps = k1.solve(steps_params=dict(debug=True))
+with st.container():
+    try:
+        # k1 = K.Kinematics1D(vi=205, vf=315, t=10.0)
+        k1 = K.Kinematics1D(**params)
+        result, steps = k1.solve(steps_params=dict(debug=True))
 
-with st.expander("Evaluated Parameters", expanded=True):
+        with st.expander("Evaluated Parameters 🎁", expanded=True):
+            U.display_result(result, known = known)
 
-    cells = [
-        (r"$\Delta x$",  f" `{result.get('Dx')}`", r"$\scriptsize \text{m}$"),
-        (r"$a$", f" `{result.get('a')}`", r"$\scriptsize \text{m}/\text{s}^{2}$"),
-        (r"$v_{avg}$", f" `{result.get('v_avg')}`", r"$\scriptsize \text{m/s}$"),
-        (r"$v_{i}$", f" `{result.get('vi')}`", r"$\scriptsize \text{m/s}$"),
-        (r"$v_{f}$", f" `{result.get('vf')}`", r"$\scriptsize \text{m/s}$"),
-        (r"$t$", f" `{result.get('t')}`", r"$\scriptsize \text{s}$"),
-    ]
-    l1 = '| ' + ' | '.join([h for h, _, _ in cells]) + ' |'
-    l2 = ':---'.join("|" * (len(cells) + 1))
-    l3 = '| ' + ' | '.join([v for _, v, _ in cells]) + ' |'
-    l4 = '| ' + ' | '.join([u for _, _, u in cells]) + ' |'
+        st.info("### Mathematical Steps 🎈🎉")
+        U.show_math_steps(steps)
 
-    st.markdown(f"""
-    | Params {l1}
-    |:---{l2}
-    | **Values** {l3}
-    | **Units** {l4}
+    except ValueError as ve:
+        st.error(dedent(f"""#### Insufficient Parameters :fire:
 
-    """)
+        {ve}
 
-    st.write("\n")
+        """))
 
-    st.warning("#### Parameters as JSON")
-    st.json(result)
+    except NotImplementedError as ne:
+        st.error(dedent(f"""#### No Implementation Exists for the Parameters ❓
 
-st.error("### Mathematical Steps")
+        The set of parameters provided have no implementation to evaluate
+        the unknown parameters.
 
-for i, step in enumerate(steps):
-    st.latex(r"\begin{aligned}" + "\n" +
-             step + "\n" + r"\end{aligned}")
-    if i < len(steps) - 1:
-        html_text = '<div style="text-align: center"> ⏬ </div>'
-        st.write(html_text,
-                 unsafe_allow_html=True)
+        {ne}
+
+        """))
+
 
 # st.latex(r'''
 # \begin{aligned}
