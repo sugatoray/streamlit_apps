@@ -6,15 +6,14 @@ from textwrap import dedent
 from typing import Optional, Dict, Any
 from dataclasses import dataclass
 
-# DEFAULT_PACKAGE_SOURCE = "PyPI"
-# DEFAULT_RECIPES_DIR = ".scrap"
 
-
+@st.cache
 def use_debug_mode(watchvariable: str = "ST_DEBUG_MODE", value: str = "0") -> bool:
     # Default is False (ST_DEBUG_MODE = "0")
     return bool(os.environ.get(watchvariable, value) == "1")
 
 
+@st.cache
 def is_streamlit_cloud(watchvariable: str = "ST_IS_STREAMLIT_CLOUD") -> bool:
     """If running in the Streamlit Cloud, set environment variable
     (the same as ``watchvariable``) to 1.
@@ -34,7 +33,7 @@ class Defaults:
     ON_ST_CLOUD: bool = is_streamlit_cloud()
     USE_DEBUG_MODE: bool = use_debug_mode()
 
-# @st.cache
+
 def create_recipes_dir(recipes_dir: Optional[str] = None, app_dir: Optional[str] = None):
     if recipes_dir is None:
         recipes_dir = Defaults.DEFAULT_RECIPES_DIR
@@ -49,6 +48,7 @@ def create_recipes_dir(recipes_dir: Optional[str] = None, app_dir: Optional[str]
     return recipes_dir
 
 
+@st.cache
 def create_command(package_name: str, options: Dict[str, Any], package_version: str = ""):
     recipes_dir = os.environ.get('RECIPES_DIR')
     version_contraint = f'=={package_version}' if package_version else ''
@@ -61,7 +61,7 @@ def create_command(package_name: str, options: Dict[str, Any], package_version: 
 def show_recipe(package_name: str, recipes_dir: str = None):
     if recipes_dir is None:
         recipes_dir = os.environ.get('RECIPES_DIR')
-    st.success("### Recipe")
+    st.success("### Recipe 🎁")
     recipe_path = os.path.join(
         recipes_dir, package_name, "meta.yaml")  # type: ignore
     recipe = ""
@@ -101,6 +101,7 @@ def add_about_section():
     )
 
 
+@st.cache
 def generate_message_as_image(message: str, height: int = 600, width: int = 1200, bgcolor: str = "0288d1", textcolor: str = "fff"):
     import urllib
     message = urllib.parse.quote_plus(message)
@@ -113,6 +114,7 @@ def show_message(message: str="Not Yet Implemented!", **kwargs):
     st.write(f"![message]({url})")
 
 
+@st.cache
 def run_command(command: str, timeout: Optional[int]=None):
     if timeout is None:
         timeout = Defaults.TIME_OUT

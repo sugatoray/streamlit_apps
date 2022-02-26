@@ -97,7 +97,7 @@ def generate_pypi_recipe(options: Dict[str, Any], generate: bool = False, recipe
     if package_name and package_name is not None:
         command = U.create_command(
             package_name, options, package_version=package_version)
-        st.info("### Command")
+        st.info("### Command 🍎")
         if Defaults.USE_DEBUG_MODE or options.get("debug-mode", False):
             st.code(command, language="sh")
         else:

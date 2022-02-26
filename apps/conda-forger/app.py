@@ -37,7 +37,8 @@ IS_GITHUB = options.get("source", Defaults.DEFAULT_PACKAGE_SOURCE).lower() == "g
 if IS_PYPI:
 
     options, generate, clear_workspace = A.update_app_options(options, recipes_dir=recipes_dir)
-    st.json(options)
+    with st.expander("Input Parameters 📥", expanded=False):
+        st.json(options)
 
     recipe = A.generate_pypi_recipe(
         options,
