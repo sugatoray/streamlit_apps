@@ -114,7 +114,6 @@ def show_message(message: str="Not Yet Implemented!", **kwargs):
     st.write(f"![message]({url})")
 
 
-@st.cache
 def run_command(command: str, timeout: Optional[int]=None):
     if timeout is None:
         timeout = Defaults.TIME_OUT
