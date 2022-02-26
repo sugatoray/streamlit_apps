@@ -7,10 +7,11 @@
 3. Create a new branch by the name of the PyPI package (say, `genespeak`).
 4. Hit `.` (period or dot) on your keyboard.
 5. The same forked repository will open on [vscode.dev](https://vscode.dev) with the branch you just created.
-6. Create a folder by the name of the PyPI package (*use all lower case*).
+6. Create a folder by the name of the PyPI package (*use all lower case*), inside the **`recipes`** folder.
+   - You will find another `example` folder there. Leave it as is.
 7. Create a file `meta.yaml` in side the folder you created in the previous step.
 8. Generate the recipe for the PyPI package by specifying a version number (use the [conda-forger app](https://tinyurl.com/conda-forger)).
-9. Copy the generated recipe and paste inside the `meta.yaml` file you just created.
+9.  Copy the generated recipe and paste inside the `meta.yaml` file you just created.
 10. Go back to https://github.com/conda-forge/staged-recipes or your fork of the staged-recipes.
     -  Initiate a pull request (PR).
     -  Follow the instructions in the PR template.
