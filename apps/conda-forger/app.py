@@ -1,5 +1,6 @@
 import os
 import streamlit as st
+from textwrap import dedent
 
 import utils as U
 import appfactory as A
@@ -15,7 +16,14 @@ recipes_dir = U.create_recipes_dir(recipes_dir=None, app_dir=Defaults.APP_DIR)
 
 st.header("Conda Forger App :zap:")
 
-st.write("This app helps you in creating conda-forge recipes.")
+st.write(dedent("""
+    This app helps you in creating **conda-forge** recipes.
+
+    > *Powered by* [**`grayskull`**](https://github.com/conda-incubator/grayskull) ❤️
+    """))
+
+with st.expander("Instruction: How to create a conda-forge package", expanded=False):
+    st.write(dedent(open(os.path.join(Defaults.APP_DIR, "instruction.md")).read().replace("# Instruction", "").replace("# ", "### ")))
 
 if options.get("debug-mode", False):
     st.write("**Recipes Directory:**")
