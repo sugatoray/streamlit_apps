@@ -97,3 +97,14 @@ def add_about_section():
         """
         )
     )
+
+
+def generate_message_as_image(message: str, height: int = 600, width: int = 1200, bgcolor: str = "0288d1", textcolor: str = "fff"):
+    import urllib
+    message = urllib.parse.quote_plus(message)
+    image_url = f"https://fakeimg.pl/{width}x{height}/{bgcolor}/{textcolor}/?text={message}"
+    return image_url
+
+def show_message(message: str="Not Yet Implemented!", **kwargs):
+    url = generate_message_as_image(message, **kwargs)
+    st.write(f"![message]({url})")

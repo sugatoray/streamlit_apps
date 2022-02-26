@@ -17,13 +17,14 @@ st.header("Conda Forger App :zap:")
 
 st.write("This app helps you in creating conda-forge recipes.")
 
-if Defaults.USE_DEBUG_MODE or options.get("debug-mode", False):
+if options.get("debug-mode", False):
     st.write("**Recipes Directory:**")
     st.code(os.environ.get("RECIPES_DIR"))
 
 options = A.make_sidebar(recipes_dir=recipes_dir)
 
 IS_PYPI = options.get("source", Defaults.DEFAULT_PACKAGE_SOURCE).lower() == "pypi"
+IS_GITHUB = options.get("source", Defaults.DEFAULT_PACKAGE_SOURCE).lower() == "github"
 
 if IS_PYPI:
 
@@ -35,3 +36,7 @@ if IS_PYPI:
         generate=generate,
         recipes_dir=recipes_dir,
     )
+
+if IS_GITHUB:
+    msg_params = dict(height=300, width=700, bgcolor="fa5043", textcolor="fff")
+    U.show_message("Not Yet Implemented!", **msg_params)
