@@ -33,6 +33,15 @@ def make_sidebar(recipes_dir: Optional[str]=None):
         if options["clearall"]:
             U.clearall(recipes_dir=recipes_dir) # type: ignore
 
+        options["timeout"] = st.number_input(
+            label="Timeout (in seconds)",
+            min_value=10,
+            max_value=40,
+            value=Defaults.TIME_OUT,
+            step=5,
+        )
+
+
         if not Defaults.ON_ST_CLOUD:
             st.write("## :fire: Use Debug Mode")
             options["debug-mode"] = st.checkbox(
@@ -93,21 +102,21 @@ def generate_pypi_recipe(options: Dict[str, Any], generate: bool = False, recipe
             st.code(command, language="sh")
         else:
             st.code(command.split("-o")[0], language="sh")
-        try:
-            if generate:
-                recipes_dir = U.create_recipes_dir(recipes_dir=recipes_dir)
-                result = subprocess.run(
-                    command, capture_output=True, shell=True, timeout=20, check=True)
+        if generate:
+            recipes_dir = U.create_recipes_dir(recipes_dir=recipes_dir)
+            try:
+                result = U.run_command(command, timeout=options.get(
+                    "timeout", Defaults.TIME_OUT))
 
                 if result.returncode == 0:
                     recipe = U.show_recipe(
                         package_name, recipes_dir=recipes_dir)
                     return recipe
 
-        except subprocess.CalledProcessError as e:
-            st.error(dedent(f"""### CalledProcessError
+            except subprocess.CalledProcessError as e:
+                st.error(dedent(f"""### CalledProcessError
 
-            {e}
+                {e}
 
-            """))
-            return None
+                """))
+                return None

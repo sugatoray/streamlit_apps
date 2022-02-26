@@ -1,12 +1,13 @@
 import streamlit as st
 import os
 import shutil
+import subprocess
 from textwrap import dedent
 from typing import Optional, Dict, Any
 from dataclasses import dataclass
 
-DEFAULT_PACKAGE_SOURCE = "PyPI"
-DEFAULT_RECIPES_DIR = ".scrap"
+# DEFAULT_PACKAGE_SOURCE = "PyPI"
+# DEFAULT_RECIPES_DIR = ".scrap"
 
 
 def use_debug_mode(watchvariable: str = "ST_DEBUG_MODE", value: str = "0") -> bool:
@@ -26,6 +27,7 @@ def is_streamlit_cloud(watchvariable: str = "ST_IS_STREAMLIT_CLOUD") -> bool:
 class Defaults:
     DEFAULT_PACKAGE_SOURCE: str = "PyPI"
     DEFAULT_RECIPES_DIR: str = ".scrap"
+    TIME_OUT: int = 20
     APP_DIR: str = os.environ.get("ST_APP_DIR", os.path.abspath(os.path.dirname(__file__)))
     APP_URL: str = r"https://share.streamlit.io/sugatoray/streamlit_apps/master/apps/conda-forger/app.py"
     APP_URL_SHORT: str = r"https://tinyurl.com/conda-forger"
@@ -105,6 +107,20 @@ def generate_message_as_image(message: str, height: int = 600, width: int = 1200
     image_url = f"https://fakeimg.pl/{width}x{height}/{bgcolor}/{textcolor}/?text={message}"
     return image_url
 
+
 def show_message(message: str="Not Yet Implemented!", **kwargs):
     url = generate_message_as_image(message, **kwargs)
     st.write(f"![message]({url})")
+
+
+def run_command(command: str, timeout: Optional[int]=None):
+    if timeout is None:
+        timeout = Defaults.TIME_OUT
+    result = subprocess.run(
+        command,
+        capture_output=True,
+        shell=True,
+        timeout=timeout,
+        check=True,
+    )
+    return result
