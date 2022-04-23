@@ -103,20 +103,21 @@ def generate_pypi_recipe(options: Dict[str, Any], generate: bool = False, recipe
         else:
             st.code(command.split("-o")[0], language="sh")
         if generate:
-            recipes_dir = U.create_recipes_dir(recipes_dir=recipes_dir)
-            try:
-                result = U.run_command(command, timeout=options.get(
-                    "timeout", Defaults.TIME_OUT))
+            with st.spinner("Generating recipe... ⏳"):
+                recipes_dir = U.create_recipes_dir(recipes_dir=recipes_dir)
+                try:
+                    result = U.run_command(command, timeout=options.get(
+                        "timeout", Defaults.TIME_OUT))
 
-                if result.returncode == 0:
-                    recipe = U.show_recipe(
-                        package_name, recipes_dir=recipes_dir)
-                    return recipe
+                    if result.returncode == 0:
+                        recipe = U.show_recipe(
+                            package_name, recipes_dir=recipes_dir)
+                        return recipe
 
-            except subprocess.CalledProcessError as e:
-                st.error(dedent(f"""### CalledProcessError
+                except subprocess.CalledProcessError as e:
+                    st.error(dedent(f"""### CalledProcessError
 
-                {e}
+                    {e}
 
-                """))
-                return None
+                    """))
+                    return None
