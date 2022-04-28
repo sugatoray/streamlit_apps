@@ -2,8 +2,8 @@ import os
 import streamlit as st
 from textwrap import dedent
 
-import utils as U
-import appfactory as A
+from components import utils as U
+from components import appfactory as A
 
 Defaults = U.Defaults
 options = dict()
