@@ -4,7 +4,7 @@ import streamlit as st
 from textwrap import dedent
 from typing import Optional, Dict, Any
 
-import utils as U
+from components import utils as U
 
 Defaults = U.Defaults
 
