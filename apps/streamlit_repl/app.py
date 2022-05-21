@@ -46,7 +46,7 @@ theme = options.get("theme", Defaults.DefaultReplTheme)
 #     params=dict(toolbar=toolbar, kernel=kernel, theme=theme)
 # )
 
-iframeurl = f"https://replite.vercel.app/retro/consoles/?toolbar={toolbar}&kernel={kernel}&theme={theme.replace(' ', '+')}"
+iframeurl = f"https://replite.vercel.app/repl/?toolbar={toolbar}&kernel={kernel}&theme={theme.replace(' ', '+')}"
 
 st.success(dedent("""### Enjoy the REPL! 🎈🎉
 
