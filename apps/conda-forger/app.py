@@ -33,7 +33,7 @@ options = A.make_sidebar(recipes_dir=recipes_dir)
 
 st.info(f"""### Tip 💡
     If the recipe generation fails, you may want to try with 
-    a higher timeout (> {options.get("timeout")} seconds).
+    a higher timeout (`>{options.get("timeout")},<={A.MAX_TIME_OUT}` seconds).
     """)
 
 IS_PYPI = options.get("source", Defaults.DEFAULT_PACKAGE_SOURCE).lower() == "pypi"
