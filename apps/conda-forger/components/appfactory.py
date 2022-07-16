@@ -36,7 +36,7 @@ def make_sidebar(recipes_dir: Optional[str]=None):
         options["timeout"] = st.number_input(
             label="Timeout (in seconds)",
             min_value=10,
-            max_value=os.environ.get("APP_MAX_TIME_OUT", Defaults.MAX_TIME_OUT)
+            max_value=int(os.environ.get("ST_MAX_TIME_OUT", Defaults.MAX_TIME_OUT)),
             value=Defaults.TIME_OUT,
             step=5,
         )

@@ -31,6 +31,11 @@ if options.get("debug-mode", False):
 
 options = A.make_sidebar(recipes_dir=recipes_dir)
 
+st.info(f"""### Tip 💡
+    If the recipe generation fails, you may want to try with 
+    a higher timeout (> {options.get("timeout")} seconds).
+    """)
+
 IS_PYPI = options.get("source", Defaults.DEFAULT_PACKAGE_SOURCE).lower() == "pypi"
 IS_GITHUB = options.get("source", Defaults.DEFAULT_PACKAGE_SOURCE).lower() == "github"
 

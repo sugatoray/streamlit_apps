@@ -27,6 +27,7 @@ class Defaults:
     DEFAULT_PACKAGE_SOURCE: str = "PyPI"
     DEFAULT_RECIPES_DIR: str = ".scrap"
     TIME_OUT: int = 20
+    MAX_TIME_OUT: int = 60
     APP_DIR: str = os.environ.get("ST_APP_DIR", os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
     APP_URL: str = r"https://share.streamlit.io/sugatoray/streamlit_apps/master/apps/conda-forger/app.py"
     APP_URL_SHORT: str = r"https://tinyurl.com/conda-forger"

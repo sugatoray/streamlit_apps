@@ -8,3 +8,5 @@
 [#streamlit-conda-forger-app]: https://share.streamlit.io/sugatoray/streamlit_apps/master/apps/conda-forger/app.py
 [#code-conda-forger-app]: https://github.com/sugatoray/streamlit_apps/blob/master/apps/conda-forger/app.py
 <!--- Define Links: End --->
+
+👉 Use `ST_MAX_TIME_OUT` environment variable to change the max timeout for the app, from the app page.
