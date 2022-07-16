@@ -8,6 +8,13 @@ from components import utils as U
 
 Defaults = U.Defaults
 
+try:
+    MAX_TIME_OUT = int(os.environ.get("ST_MAX_TIME_OUT", Defaults.MAX_TIME_OUT))
+except ValueError as e:
+    MAX_TIME_OUT = Defaults.MAX_TIME_OUT
+    os.environ["ST_MAX_TIME_OUT"] = MAX_TIME_OUT
+
+
 def make_sidebar(recipes_dir: Optional[str]=None):
     if recipes_dir is None:
         recipes_dir = os.environ.get("RECIPES_DIR")
@@ -33,10 +40,11 @@ def make_sidebar(recipes_dir: Optional[str]=None):
         if options["clearall"]:
             U.clearall(recipes_dir=recipes_dir) # type: ignore
 
+
         options["timeout"] = st.number_input(
             label="Timeout (in seconds)",
             min_value=10,
-            max_value=40,
+            max_value=MAX_TIME_OUT,
             value=Defaults.TIME_OUT,
             step=5,
         )

@@ -23,13 +23,23 @@ st.write(dedent("""
     """))
 
 with st.expander("Instruction: How to create a conda-forge package", expanded=False):
-    st.write(dedent(open(os.path.join(Defaults.APP_DIR, "instruction.md")).read().replace("# Instruction", "").replace("# ", "### ")))
+    st.write(dedent(open(os.path.join(Defaults.APP_DIR, "instruction.md"))
+                        .read()
+                        .replace("# Instruction", "")
+                        .replace("# ", "### ")
+                    )
+            )
 
 if options.get("debug-mode", False):
     st.write("**Recipes Directory:**")
     st.code(os.environ.get("RECIPES_DIR"))
 
 options = A.make_sidebar(recipes_dir=recipes_dir)
+
+st.info(f"""### Tip 💡
+    If the recipe generation fails, you may want to try with 
+    a higher timeout (`>{options.get("timeout")},<={A.MAX_TIME_OUT}` seconds).
+    """)
 
 IS_PYPI = options.get("source", Defaults.DEFAULT_PACKAGE_SOURCE).lower() == "pypi"
 IS_GITHUB = options.get("source", Defaults.DEFAULT_PACKAGE_SOURCE).lower() == "github"
