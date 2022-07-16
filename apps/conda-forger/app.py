@@ -23,7 +23,12 @@ st.write(dedent("""
     """))
 
 with st.expander("Instruction: How to create a conda-forge package", expanded=False):
-    st.write(dedent(open(os.path.join(Defaults.APP_DIR, "instruction.md")).read().replace("# Instruction", "").replace("# ", "### ")))
+    st.write(dedent(open(os.path.join(Defaults.APP_DIR, "instruction.md"))
+                        .read()
+                        .replace("# Instruction", "")
+                        .replace("# ", "### ")
+                    )
+            )
 
 if options.get("debug-mode", False):
     st.write("**Recipes Directory:**")
