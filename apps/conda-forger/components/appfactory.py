@@ -155,7 +155,15 @@ def generate_recipe(options: Dict[str, Any], generate: bool = False, recipes_dir
                 github_repo_url = github_repo_url,
                 github_release_tag = github_release_tag
             )
-            package_name = U.parse_github_url(url).get("repo", U.dummy_package_name())
+            
+            parsed = U.parse_github_url(url=github_repo_url)
+            _ = parsed.pop("extra")
+            options.update({"parsed": parsed})
+
+            package_name = parsed.get("repo", U.dummy_package_name())
+            
+            if options.get("debug-mode", False):
+                st.json({"options": options, "package_name_dir": package_name})
     
     if command and package_name:
         st.info("### Command 🍎")
