@@ -10,6 +10,9 @@ APP_CODE_BADGE = Defaults.APP_CODE_BADGE
 
 def main():
     options = dict()
+
+    # This must be the first Streamlit command used 
+    # in your app, and must only be set once.
     st.set_page_config(**U.APP_CONFIG)
 
     os.environ["RECIPES_DIR"] = os.path.join(
@@ -60,10 +63,13 @@ def main():
 
         options, generate, clear_workspace = A.update_app_options(options, recipes_dir=recipes_dir)
         
-        if options["use_wide_layout"]:
-            st.set_page_config(layout="wide")
-        else:
-            st.set_page_config(layout="centered")
+        ## Cannot be called multiple times to change layout
+        ## Only call once at the top of the app.
+        #
+        # if options["use_wide_layout"]:
+        #     st.set_page_config(layout="wide")
+        # else:
+        #     st.set_page_config(layout="centered")
 
         with st.expander("Input Parameters 📥", expanded=False):
             st.json(options)

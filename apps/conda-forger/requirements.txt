@@ -1,4 +1,4 @@
-streamlit>=1.4.0
+streamlit>=1.11.0
 grayskull>=1.4.1
 parse>=1.19.0
 faker>=13.15.1
