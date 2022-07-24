@@ -43,8 +43,8 @@ def main():
         a higher timeout (`>{options.get("timeout")},<={A.MAX_TIME_OUT}` seconds).
         """))
 
-    IS_PYPI = U.source_pypi(options)
-    IS_GITHUB = U.source_github(options)
+    IS_PYPI = U.source_is_pypi(options)
+    IS_GITHUB = U.source_is_github(options)
     options["IS_PYPI"] = IS_PYPI
     options["IS_GITHUB"] = IS_GITHUB
 
