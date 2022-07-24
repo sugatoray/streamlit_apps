@@ -14,7 +14,7 @@ try:
 except ValueError as e:
     MAX_TIME_OUT = Defaults.MAX_TIME_OUT
 finally:
-    os.environ["ST_MAX_TIME_OUT"] = MAX_TIME_OUT
+    os.environ["ST_MAX_TIME_OUT"] = str(MAX_TIME_OUT)
 
 
 def make_sidebar(recipes_dir: Optional[str]=None):
