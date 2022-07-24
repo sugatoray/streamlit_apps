@@ -8,12 +8,12 @@ from components import appfactory as A
 Defaults = U.Defaults
 APP_CODE_BADGE = Defaults.APP_CODE_BADGE
 
+# This must be the first Streamlit command used 
+# in your app, and must only be set once.
+st.set_page_config(**U.APP_CONFIG)
+
 def main():
     options = dict()
-
-    # This must be the first Streamlit command used 
-    # in your app, and must only be set once.
-    st.set_page_config(**U.APP_CONFIG)
 
     os.environ["RECIPES_DIR"] = os.path.join(
         Defaults.APP_DIR, Defaults.DEFAULT_RECIPES_DIR)
@@ -28,7 +28,10 @@ def main():
 
         > *Powered by* [**`grayskull`**](https://github.com/conda-incubator/grayskull) ❤️
         
-        :bulb: *If you like the app please consider leaving a :star: at the GitHub repository.* 
+        """))
+
+    st.warning(dedent(f"""    
+        :bulb: ***If you like the app, please consider leaving a :star: at the GitHub repository.*** 
         [![GitHub App Code]({APP_CODE_BADGE.format(message="streamlit-conda-forger")})][#code-conda-forger-app]
 
         [#code-conda-forger-app]: {Defaults.APP_REPO_URL}
