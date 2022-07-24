@@ -9,6 +9,7 @@ Defaults = U.Defaults
 
 def main():
     options = dict()
+    st.set_page_config(**Defaults.APP_CONFIG)
 
     os.environ["RECIPES_DIR"] = os.path.join(
         Defaults.APP_DIR, Defaults.DEFAULT_RECIPES_DIR)
@@ -18,10 +19,15 @@ def main():
 
     st.header("Conda Forger App :zap:")
 
-    st.write(dedent("""
+    st.write(dedent(f"""
         Create **conda-forge** recipes lightning-fast online! :zap:
 
         > *Powered by* [**`grayskull`**](https://github.com/conda-incubator/grayskull) ❤️
+        
+        :bulb: *If you like the app please consider leaving a :star: at the GitHub repository.* 
+        [![GitHub App Code]({Defaults.APP_CODE_BADGE.format(message="streamlit-conda-forger")})][#code-conda-forger-app]
+
+        [#code-conda-forger-app]: {Defaults.APP_REPO_URL}
         """))
 
     with st.expander("Instruction: How to create a conda-forge package", expanded=False):
@@ -52,6 +58,8 @@ def main():
     if IS_PYPI or IS_GITHUB:
 
         options, generate, clear_workspace = A.update_app_options(options, recipes_dir=recipes_dir)
+        if options["use_wide_layout"]:
+            st.set_page_config(layout="wide")
         with st.expander("Input Parameters 📥", expanded=False):
             st.json(options)
 

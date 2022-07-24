@@ -51,6 +51,11 @@ def make_sidebar(recipes_dir: Optional[str]=None):
             step=5,
         )
 
+        options["use_wide_layout"] = st.checkbox(
+            label="Use Wide Layout",
+            value=Defaults.USE_WIDE_LAYOUT, # False
+        )
+
 
         if not Defaults.ON_ST_CLOUD:
             st.write("## :fire: Use Debug Mode")

@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from parse import parse, compile, Parser
 from faker import Faker
 
+
 @st.cache
 def use_debug_mode(watchvariable: str = "ST_DEBUG_MODE", value: str = "0") -> bool:
     # Default is False (ST_DEBUG_MODE = "0")
@@ -24,6 +25,12 @@ def is_streamlit_cloud(watchvariable: str = "ST_IS_STREAMLIT_CLOUD") -> bool:
 
 
 @st.cache
+def use_wide_layout(watchvariable: str = "ST_USE_WIDE_LAYOUT", value: str = "0") -> bool:
+    # Default is False (ST_USE_WIDE_LAYOUT = "0")
+    return bool(os.environ.get(watchvariable, value) == "1")
+
+
+@st.cache
 @dataclass
 class Defaults:
     DEFAULT_PACKAGE_SOURCE: str = "PyPI"
@@ -33,8 +40,18 @@ class Defaults:
     APP_DIR: str = os.environ.get("ST_APP_DIR", os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
     APP_URL: str = r"https://share.streamlit.io/sugatoray/streamlit_apps/master/apps/conda-forger/app.py"
     APP_URL_SHORT: str = r"https://tinyurl.com/conda-forger"
+    APP_REPO_URL: str = r"https://github.com/sugatoray/streamlit_apps/blob/master/apps/conda-forger/app.py"
+    APP_CODE_BADGE: str = r"https://img.shields.io/static/v1?logo=github&style=flat&color=blue&label=code&message={message}%20⭐"
     ON_ST_CLOUD: bool = is_streamlit_cloud()
     USE_DEBUG_MODE: bool = use_debug_mode()
+    USE_WIDE_LAYOUT: bool = use_wide_layout()
+    APP_CONFIG: dict = dict(
+        page_title = "Conda-Forger App :zap:",
+        page_icon = ":zap:",
+        layout = "wide" if use_wide_layout() else "centered",
+        initial_sidebar_state = "expanded",
+        menu_items = {},
+    )
 
 
 def create_recipes_dir(recipes_dir: Optional[str] = None, app_dir: Optional[str] = None) -> str:
