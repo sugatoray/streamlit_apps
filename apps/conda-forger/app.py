@@ -105,7 +105,7 @@ def main():
                     st.markdown(dedent("""
                     <div style="background-color: #52d2fd;">
                         <img src="https://fakeimg.pl/300x300/52d2fd/1b4553/?text=Download" 
-                             style="display: block; margin-left: auto; margin-right: auto; width: 50%;" />
+                             style="display: block; margin-left: auto; margin-right: auto; width: 50%; margin-top: auto; margin-bottom: auto; height: 50%;" />
                     </div>                    
                     """), unsafe_allow_html=True)
     # if IS_GITHUB:
