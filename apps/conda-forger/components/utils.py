@@ -4,7 +4,7 @@ import shutil
 import subprocess
 from textwrap import dedent
 from typing import Optional, Dict, Any
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from parse import parse, compile, Parser
 from faker import Faker
