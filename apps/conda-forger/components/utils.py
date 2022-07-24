@@ -6,6 +6,8 @@ from textwrap import dedent
 from typing import Optional, Dict, Any
 from dataclasses import dataclass
 
+from parse import parse, compile, Parser
+from faker import Faker
 
 @st.cache
 def use_debug_mode(watchvariable: str = "ST_DEBUG_MODE", value: str = "0") -> bool:
@@ -50,13 +52,28 @@ def create_recipes_dir(recipes_dir: Optional[str] = None, app_dir: Optional[str]
 
 
 @st.cache
-def create_command(package_name: str, options: Dict[str, Any], package_version: str = ""):
+def create_command(options: Dict[str, Any], 
+    package_name: str = "", 
+    package_version: str = "", 
+    github_repo_url: str = "", 
+    github_release_tag: str = "") -> str:
+    """Creates command with ``grayskull`` utility for PyPI package or GitHub package repository."""
     recipes_dir = os.environ.get('RECIPES_DIR')
-    version_contraint = f'=={package_version}' if package_version else ''
-    strict_conda_forge = f"--strict-conda-forge" if options.get(
-        "strict-conda-forge", False) else ""
-    command = f'grayskull pypi "{package_name}{version_contraint}" {strict_conda_forge} -o {recipes_dir} --maintainers ADD_YOUR_GITHUB_ID_HERE'
-    return command
+    
+    IS_PYPI = source_is_pypi(options)
+    IS_GITHUB = source_is_github(options)
+
+    strict_conda_forge = f" --strict-conda-forge" if options.get("strict-conda-forge", False) else ""
+
+    if IS_PYPI:
+        version_contraint = f'=={package_version}' if package_version else ''
+        command = f'grayskull pypi "{package_name}{version_contraint}"{strict_conda_forge} -o {recipes_dir} --maintainers ADD_YOUR_GITHUB_ID_HERE'
+        return command
+
+    elif IS_GITHUB:
+        release_tag = f' --tag {github_release_tag}' if github_release_tag else ''
+        command = f'grayskull pypi {github_repo_url}{release_tag}{strict_conda_forge} -o {recipes_dir} --maintainers ADD_YOUR_GITHUB_ID_HERE'
+        return command
 
 
 def show_recipe(package_name: str, recipes_dir: str = None):
@@ -126,3 +143,35 @@ def run_command(command: str, timeout: Optional[int]=None):
         check=True,
     )
     return result
+
+
+def source_is_github(options: Dict[str, Any]) -> bool:
+    """Checks if the source is from GitHub and returns True or False."""
+    return options.get("source", Defaults.DEFAULT_PACKAGE_SOURCE).lower() == "github"
+
+
+def source_is_pypi(options: Dict[str, Any]) -> bool:
+    """Checks if the source is from PyPI and returns True or False."""
+    return options.get("source", Defaults.DEFAULT_PACKAGE_SOURCE).lower() == "pypi"
+
+
+@cache
+def show_not_implemented_banner():
+    msg_params = dict(height=300, width=700, bgcolor="fa5043", textcolor="fff")
+    show_message("Not Yet Implemented!", **msg_params)
+
+
+PAT: Parser = compile("https://github.com/{owner}/{repo}/{extra}")
+
+@cache
+def parse_github_url(url: str) -> Dict[str, str]:
+    """Extract GitHub ``owner`` and ``repository`` from URL."""
+    url = url + "/extra" if url[-1]!="/" else url + "extra"
+    parsed = PAT.parse(url).named
+    return parsed
+
+
+def dummy_package_name():
+    """Returns a dummy package name in the format ``alpha-beta``."""
+    fk = Faker()
+    return f"{fk.domain_word()}-{fk.domain_word()}"
