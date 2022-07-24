@@ -7,10 +7,11 @@ from components import appfactory as A
 
 Defaults = U.Defaults
 APP_CODE_BADGE = Defaults.APP_CODE_BADGE
+APP_CONFIG = Defaults.APP_CONFIG.copy()
 
 def main():
     options = dict()
-    st.set_page_config(**Defaults.APP_CONFIG)
+    st.set_page_config(**APP_CONFIG)
 
     os.environ["RECIPES_DIR"] = os.path.join(
         Defaults.APP_DIR, Defaults.DEFAULT_RECIPES_DIR)
@@ -59,8 +60,12 @@ def main():
     if IS_PYPI or IS_GITHUB:
 
         options, generate, clear_workspace = A.update_app_options(options, recipes_dir=recipes_dir)
+        
         if options["use_wide_layout"]:
             st.set_page_config(layout="wide")
+        else:
+            st.set_page_config(layout="centered")
+
         with st.expander("Input Parameters 📥", expanded=False):
             st.json(options)
 

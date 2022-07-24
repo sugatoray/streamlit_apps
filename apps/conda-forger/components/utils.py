@@ -49,8 +49,8 @@ class Defaults:
         page_title = "Conda-Forger App :zap:",
         page_icon = ":zap:",
         layout = "wide" if use_wide_layout() else "centered",
-        initial_sidebar_state = "expanded",
-        menu_items = {},
+        initial_sidebar_state = "auto",
+        menu_items = None,
     )
 
 
