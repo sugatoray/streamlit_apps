@@ -92,7 +92,7 @@ def main():
                             iconshape='128x128'
                         )
 
-                    st.info('Filetype: **YAML**')
+                    # st.info('Filetype: **YAML**')
 
                 with col2:
                     msg_params = dict(height=300, width=700, bgcolor="52d2fd", textcolor="1b4553")
