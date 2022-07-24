@@ -37,7 +37,7 @@ class Defaults:
     USE_DEBUG_MODE: bool = use_debug_mode()
 
 
-def create_recipes_dir(recipes_dir: Optional[str] = None, app_dir: Optional[str] = None):
+def create_recipes_dir(recipes_dir: Optional[str] = None, app_dir: Optional[str] = None) -> str:
     if recipes_dir is None:
         recipes_dir = Defaults.DEFAULT_RECIPES_DIR
     if app_dir is None:
@@ -71,12 +71,12 @@ def create_command(options: Dict[str, Any],
         return command
 
     elif IS_GITHUB:
-        release_tag = f' --tag {github_release_tag}' if github_release_tag else ''
-        command = f'grayskull pypi {github_repo_url}{release_tag}{strict_conda_forge} -o {recipes_dir} --maintainers ADD_YOUR_GITHUB_ID_HERE'
+        release_tag = f' --tag "{github_release_tag}"' if github_release_tag else ''
+        command = f'grayskull pypi "{github_repo_url}"{release_tag}{strict_conda_forge} -o {recipes_dir} --maintainers ADD_YOUR_GITHUB_ID_HERE'
         return command
 
 
-def show_recipe(package_name: str, recipes_dir: str = None):
+def show_recipe(package_name: str, recipes_dir: str = None) -> str:
     if recipes_dir is None:
         recipes_dir = os.environ.get('RECIPES_DIR')
     st.success("### Recipe 🎁")
@@ -89,7 +89,7 @@ def show_recipe(package_name: str, recipes_dir: str = None):
     return recipe
 
 
-def clearall(recipes_dir: str = None):
+def clearall(recipes_dir: str = None) -> None:
     if recipes_dir is None:
         recipes_dir = os.environ.get('RECIPES_DIR')
     if os.path.isdir(recipes_dir):
@@ -120,7 +120,7 @@ def add_about_section():
 
 
 @st.cache
-def generate_message_as_image(message: str, height: int = 600, width: int = 1200, bgcolor: str = "0288d1", textcolor: str = "fff"):
+def generate_message_as_image(message: str, height: int = 600, width: int = 1200, bgcolor: str = "0288d1", textcolor: str = "fff") -> str:
     import urllib
     message = urllib.parse.quote_plus(message)
     image_url = f"https://fakeimg.pl/{width}x{height}/{bgcolor}/{textcolor}/?text={message}"
