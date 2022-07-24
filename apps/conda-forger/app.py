@@ -78,18 +78,23 @@ def main():
 
         if recipe is not None:
             with st.expander("Download Recipe 👇", expanded=True):
-                download_recipe = FileDownloader(
-                        data=recipe, 
-                        filename="meta", 
-                        file_ext="yaml"
-                    ).download(
-                        header="**Download recipe as YAML**",
-                        hyperlinktext=None,
-                        iconshape='128x128'
-                    )
+                col1, col2 = st.columns([3, 4])
+                with col1:
+                    download_recipe = FileDownloader(
+                            data=recipe, 
+                            filename="meta", 
+                            file_ext="yaml"
+                        ).download(
+                            header="**Download recipe as YAML**",
+                            hyperlinktext=None,
+                            iconshape='128x128'
+                        )
 
-                st.info('Filetype: **YAML**')
+                    st.info('Filetype: **YAML**')
 
+                with col2:
+                    msg_params = dict(height=300, width=700, bgcolor="52d2fd", textcolor="1b4553")
+                    show_message("👈 Download Recipe", **msg_params)
     # if IS_GITHUB:
     #     U.show_not_implemented_banner()
 
