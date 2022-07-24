@@ -6,12 +6,14 @@ from components import utils as U
 from components import appfactory as A
 from components.downloader import FileDownloader
 
-Defaults = U.Defaults
-APP_CODE_BADGE = Defaults.APP_CODE_BADGE
 
 # This must be the first Streamlit command used 
 # in your app, and must only be set once.
 st.set_page_config(**U.APP_CONFIG)
+
+Defaults = U.Defaults
+APP_CODE_BADGE = Defaults.APP_CODE_BADGE
+
 
 def main():
     options = dict()
