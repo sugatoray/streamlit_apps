@@ -45,12 +45,14 @@ class Defaults:
     ON_ST_CLOUD: bool = is_streamlit_cloud()
     USE_DEBUG_MODE: bool = use_debug_mode()
     USE_WIDE_LAYOUT: bool = use_wide_layout()
-    APP_CONFIG: dict = dict(
-        page_title = "Conda-Forger App :zap:",
-        page_icon = ":zap:",
-        layout = "wide" if use_wide_layout() else "centered",
-        initial_sidebar_state = "auto",
-        menu_items = None,
+    # Cannot assign a mutable dictionary to a dataclass field directly: need field + default_factory 
+    APP_CONFIG: dict = field(default_factory=lambda : dict(
+            page_title = "Conda-Forger App :zap:",
+            page_icon = ":zap:",
+            layout = "wide" if use_wide_layout() else "centered",
+            initial_sidebar_state = "auto",
+            menu_items = None,
+        )
     )
 
 
