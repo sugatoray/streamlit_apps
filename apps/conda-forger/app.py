@@ -77,7 +77,7 @@ def main():
         )
 
         if recipe is not None:
-            with st.beta_expander("Download Recipe 👇", expanded=True):
+            with st.expander("Download Recipe 👇", expanded=True):
                 download_recipe = FileDownloader(
                         data=recipe, 
                         filename="meta", 
@@ -85,7 +85,7 @@ def main():
                     ).download(
                         header="**Download recipe as YAML**",
                         hyperlinktext=None,
-                        iconshape='64x64'
+                        iconshape='128x128'
                     )
 
                 st.info('Filetype: **YAML**')
