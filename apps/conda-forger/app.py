@@ -96,7 +96,11 @@ def main():
 
                 with col2:
                     msg_params = dict(height=300, width=700, bgcolor="52d2fd", textcolor="1b4553")
-                    U.show_message("👈 Download Recipe", **msg_params)
+                    # U.show_message("👈 Download Recipe", **msg_params)
+                    st.markdown(dedent("""
+                    | ![image](https://fakeimg.pl/400x300/52d2fd/1b4553/?text=Download%20Recipe) |
+                    |:---:|
+                    """))
     # if IS_GITHUB:
     #     U.show_not_implemented_banner()
 
