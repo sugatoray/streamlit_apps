@@ -6,6 +6,7 @@ from components import utils as U
 from components import appfactory as A
 
 Defaults = U.Defaults
+APP_CODE_BADGE = Defaults.APP_CODE_BADGE
 
 def main():
     options = dict()
@@ -25,7 +26,7 @@ def main():
         > *Powered by* [**`grayskull`**](https://github.com/conda-incubator/grayskull) ❤️
         
         :bulb: *If you like the app please consider leaving a :star: at the GitHub repository.* 
-        [![GitHub App Code]({Defaults.APP_CODE_BADGE.format(message="streamlit-conda-forger")})][#code-conda-forger-app]
+        [![GitHub App Code]({APP_CODE_BADGE.format(message="streamlit-conda-forger")})][#code-conda-forger-app]
 
         [#code-conda-forger-app]: {Defaults.APP_REPO_URL}
         """))
