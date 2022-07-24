@@ -7,11 +7,10 @@ from components import appfactory as A
 
 Defaults = U.Defaults
 APP_CODE_BADGE = Defaults.APP_CODE_BADGE
-APP_CONFIG = Defaults.APP_CONFIG.copy()
 
 def main():
     options = dict()
-    st.set_page_config(**APP_CONFIG)
+    st.set_page_config(**U.APP_CONFIG)
 
     os.environ["RECIPES_DIR"] = os.path.join(
         Defaults.APP_DIR, Defaults.DEFAULT_RECIPES_DIR)

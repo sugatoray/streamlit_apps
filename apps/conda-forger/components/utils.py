@@ -30,6 +30,15 @@ def use_wide_layout(watchvariable: str = "ST_USE_WIDE_LAYOUT", value: str = "0")
     return bool(os.environ.get(watchvariable, value) == "1")
 
 
+APP_CONFIG: dict = dict(
+    page_title = "Conda-Forger App :zap:",
+    page_icon = ":zap:",
+    layout = "wide" if use_wide_layout() else "centered",
+    initial_sidebar_state = "auto",
+    menu_items = None,
+)
+
+
 @st.cache
 @dataclass
 class Defaults:
@@ -46,14 +55,14 @@ class Defaults:
     USE_DEBUG_MODE: bool = use_debug_mode()
     USE_WIDE_LAYOUT: bool = use_wide_layout()
     # Cannot assign a mutable dictionary to a dataclass field directly: need field + default_factory 
-    APP_CONFIG: dict = field(default_factory=lambda : dict(
-            page_title = "Conda-Forger App :zap:",
-            page_icon = ":zap:",
-            layout = "wide" if use_wide_layout() else "centered",
-            initial_sidebar_state = "auto",
-            menu_items = None,
-        )
-    )
+    # APP_CONFIG: dict = field(default_factory=lambda : dict(
+    #         page_title = "Conda-Forger App :zap:",
+    #         page_icon = ":zap:",
+    #         layout = "wide" if use_wide_layout() else "centered",
+    #         initial_sidebar_state = "auto",
+    #         menu_items = None,
+    #     )
+    # )
 
 
 def create_recipes_dir(recipes_dir: Optional[str] = None, app_dir: Optional[str] = None) -> str:
