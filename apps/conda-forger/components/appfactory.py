@@ -7,11 +7,13 @@ from typing import Optional, Dict, Any
 from components import utils as U
 
 Defaults = U.Defaults
+MAX_TIME_OUT = Defaults.MAX_TIME_OUT
 
 try:
     MAX_TIME_OUT = int(os.environ.get("ST_MAX_TIME_OUT", Defaults.MAX_TIME_OUT))
 except ValueError as e:
     MAX_TIME_OUT = Defaults.MAX_TIME_OUT
+finally:
     os.environ["ST_MAX_TIME_OUT"] = MAX_TIME_OUT
 
 

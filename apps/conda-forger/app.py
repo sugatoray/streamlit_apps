@@ -19,7 +19,7 @@ def main():
     st.header("Conda Forger App :zap:")
 
     st.write(dedent("""
-        This app helps you in creating **conda-forge** recipes.
+        Create **conda-forge** recipes lightning-fast online! :zap:
 
         > *Powered by* [**`grayskull`**](https://github.com/conda-incubator/grayskull) ❤️
         """))
@@ -38,10 +38,11 @@ def main():
 
     options = A.make_sidebar(recipes_dir=recipes_dir)
 
-    st.info(dedent(f"""### Tip 💡
-        If the recipe generation fails, you may want to try with 
-        a higher timeout (`>{options.get("timeout")},<={A.MAX_TIME_OUT}` seconds).
-        """))
+    tip = dedent(f"""If the recipe generation fails, you may want to try with 
+    a higher timeout (`>{options.get("timeout")},<={A.MAX_TIME_OUT}` seconds).
+    """)
+
+    st.info(f"### Tip 💡\n{tip}")
 
     IS_PYPI = U.source_is_pypi(options)
     IS_GITHUB = U.source_is_github(options)
