@@ -156,7 +156,7 @@ def generate_recipe(options: Dict[str, Any], generate: bool = False, recipes_dir
                 github_release_tag = github_release_tag
             )
             
-            parsed = U.parse_github_url(url=github_repo_url)
+            parsed = U.parse_github_url(url=github_repo_url).copy()
             _ = parsed.pop("extra")
             options.update({"parsed": parsed})
 

@@ -163,7 +163,7 @@ def show_not_implemented_banner():
 
 PAT: Parser = compile("https://github.com/{owner}/{repo}/{extra}")
 
-@st.cache
+# @st.cache
 def parse_github_url(url: str) -> Dict[str, str]:
     """Extract GitHub ``owner`` and ``repository`` from URL."""
     url = url + "/extra" if url[-1]!="/" else url + "extra"
