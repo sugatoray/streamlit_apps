@@ -65,14 +65,6 @@ def main():
     if IS_PYPI or IS_GITHUB:
 
         options, generate, clear_workspace = A.update_app_options(options, recipes_dir=recipes_dir)
-        
-        ## Cannot be called multiple times to change layout
-        ## Only call once at the top of the app.
-        #
-        # if options["use_wide_layout"]:
-        #     st.set_page_config(layout="wide")
-        # else:
-        #     st.set_page_config(layout="centered")
 
         with st.expander("Input Parameters 📥", expanded=False):
             st.json(options)
