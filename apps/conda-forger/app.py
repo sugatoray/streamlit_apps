@@ -101,9 +101,11 @@ def main():
                     # | ![image](https://fakeimg.pl/400x300/52d2fd/1b4553/?text=Download%20Recipe) |
                     # |:---:|
                     # """))
+                    
                     st.markdown(dedent("""
-                    <div style="background-color: #52d2fd">
-                        <img src="https://fakeimg.pl/400x300/52d2fd/1b4553/?text=Download%20Recipe">
+                    <div style="background-color: #52d2fd;">
+                        <img src="https://fakeimg.pl/300x300/52d2fd/1b4553/?text=Download" 
+                             style="display: block; margin-left: auto; margin-right: auto; width: 50%;" />
                     </div>                    
                     """), unsafe_allow_html=True)
     # if IS_GITHUB:
