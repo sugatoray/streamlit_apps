@@ -31,7 +31,7 @@ def use_wide_layout(watchvariable: str = "ST_USE_WIDE_LAYOUT", value: str = "0")
 
 
 APP_CONFIG: dict = dict(
-    page_title = "Conda-Forger App :zap:",
+    page_title = "Conda-Forger App",
     page_icon = ":zap:",
     layout = "wide" if use_wide_layout() else "centered",
     initial_sidebar_state = "auto",
