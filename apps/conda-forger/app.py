@@ -4,6 +4,7 @@ from textwrap import dedent
 
 from components import utils as U
 from components import appfactory as A
+from components.downloader import FileDownloader
 
 Defaults = U.Defaults
 APP_CODE_BADGE = Defaults.APP_CODE_BADGE
@@ -74,6 +75,20 @@ def main():
             generate=generate,
             recipes_dir=recipes_dir,
         )
+
+        if recipe is not None:
+            with st.beta_expander("Download Recipe 👇", expanded=True):
+                download_recipe = FileDownloader(
+                        data=recipe, 
+                        filename="meta", 
+                        file_ext="yaml"
+                    ).download(
+                        header="**Download recipe as YAML**",
+                        hyperlinktext=None,
+                        iconshape='64x64'
+                    )
+
+                st.info('Filetype: **YAML**')
 
     # if IS_GITHUB:
     #     U.show_not_implemented_banner()
