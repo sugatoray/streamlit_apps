@@ -176,9 +176,14 @@ def generate_recipe(options: Dict[str, Any], generate: bool = False, recipes_dir
                         return recipe
 
                 except subprocess.CalledProcessError as e:
-                    st.error(dedent(f"""### CalledProcessError
 
-                    {e}
+                    msg_params = dict(height=300, width=700, bgcolor="fa5043", textcolor="fff")
+                    U.show_message("Bad Request!", **msg_params)
 
-                    """))
-                    return None
+                    with st.expander("See Error Details ⛔", expanded=False):
+                        st.error(dedent(f"""### CalledProcessError
+
+                        {e}
+
+                        """))
+                        return None
