@@ -155,7 +155,7 @@ def source_is_pypi(options: Dict[str, Any]) -> bool:
     return options.get("source", Defaults.DEFAULT_PACKAGE_SOURCE).lower() == "pypi"
 
 
-@cache
+@st.cache
 def show_not_implemented_banner():
     msg_params = dict(height=300, width=700, bgcolor="fa5043", textcolor="fff")
     show_message("Not Yet Implemented!", **msg_params)
@@ -163,7 +163,7 @@ def show_not_implemented_banner():
 
 PAT: Parser = compile("https://github.com/{owner}/{repo}/{extra}")
 
-@cache
+@st.cache
 def parse_github_url(url: str) -> Dict[str, str]:
     """Extract GitHub ``owner`` and ``repository`` from URL."""
     url = url + "/extra" if url[-1]!="/" else url + "extra"
