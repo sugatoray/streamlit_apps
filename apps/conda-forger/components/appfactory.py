@@ -78,11 +78,20 @@ def update_app_options(options: Dict[str, Any], recipes_dir: Optional[str]=None)
     if IS_PYPI:
         col1, col2 = st.columns([3, 2])
         with col1:
+            _help = dedent("""\
+            
+                > For instance, if you want to create 
+                > a recipe for `genespeak` library, 
+                > insert `genespeak` in this field.
+                >
+                > - **PyPI**: https://pypi.org/project/genespeak/
+                > - **Installation**: `pip install genespeak`
+                """)
             options["package_name"] = st.text_input(
                 label="PyPI Package Name 👇",
                 value="",
                 placeholder="Null",
-                help="Provide package name from PyPI",
+                help=f"Provide package name from PyPI. \n{_help}",
             )
 
         with col2:
@@ -90,7 +99,7 @@ def update_app_options(options: Dict[str, Any], recipes_dir: Optional[str]=None)
                 label="PyPI Package Version 👇",
                 value="",
                 placeholder="Null",
-                help="Optionally, specify package version from PyPI",
+                help="Optionally, specify package version from PyPI.",
             )
     
     elif IS_GITHUB:
