@@ -100,7 +100,10 @@ def update_app_options(options: Dict[str, Any], recipes_dir: Optional[str]=None)
                 label="GitHub Repository URL 👇",
                 value="",
                 placeholder="https://github.com/{{ OWNER }}/{{ REPOSITORY }}",
-                help="Provide GitHub package repository url",
+                help=dedent("""Provide GitHub package repository url. 
+
+                > For instance, if you want to create a recipe for `genespeak` library, 
+                > insert `https://github.com/sugatoray/genespeak` in this field."""),
             )
 
         with col2:
