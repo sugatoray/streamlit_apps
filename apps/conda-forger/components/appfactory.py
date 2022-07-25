@@ -105,7 +105,7 @@ def update_app_options(options: Dict[str, Any], recipes_dir: Optional[str]=None)
                 label="GitHub Repository URL 👇",
                 value="",
                 placeholder="https://github.com/{{ OWNER }}/{{ REPOSITORY }}",
-                help=dedent(f"""Provide GitHub package repository url. \n{_help}""",
+                help=f"Provide GitHub package repository url. \n{_help}",
             )
 
         with col2:
