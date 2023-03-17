@@ -6,16 +6,11 @@ from components import utils as U
 from components import appfactory as A
 from components.downloader import FileDownloader
 
-# read in environment variale "ST_USE_WIDE_LAYOUT"
-def use_wide_layout(watchvariable: str = "ST_USE_WIDE_LAYOUT", value: str = "0") -> bool:
-    # Default is False (ST_USE_WIDE_LAYOUT = "0")
-    return bool(os.environ.get(watchvariable, value) == "1")
-
 # define app config
 APP_CONFIG: dict = dict(
     page_title = "Conda-Forger App",
     page_icon = ":zap:",
-    layout = "wide" if use_wide_layout() else "centered",
+    layout = "wide" if U.use_wide_layout() else "centered",
     initial_sidebar_state = "auto",
     menu_items = None,
 )
