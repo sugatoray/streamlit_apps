@@ -17,7 +17,7 @@ APP_CONFIG: dict = dict(
 
 # This must be the first Streamlit command used 
 # in your app, and must only be set once.
-st.set_page_config(**U.APP_CONFIG)
+st.set_page_config(**APP_CONFIG)
 
 Defaults = U.Defaults
 APP_CODE_BADGE = Defaults.APP_CODE_BADGE
