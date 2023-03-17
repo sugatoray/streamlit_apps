@@ -10,6 +10,12 @@ from parse import parse, compile, Parser
 from faker import Faker
 
 
+# read in environment variale "ST_USE_WIDE_LAYOUT"
+def use_wide_layout(watchvariable: str = "ST_USE_WIDE_LAYOUT", value: str = "0") -> bool:
+    # Default is False (ST_USE_WIDE_LAYOUT = "0")
+    return bool(os.environ.get(watchvariable, value) == "1")
+    
+
 @st.cache_data
 def use_debug_mode(watchvariable: str = "ST_DEBUG_MODE", value: str = "0") -> bool:
     # Default is False (ST_DEBUG_MODE = "0")
