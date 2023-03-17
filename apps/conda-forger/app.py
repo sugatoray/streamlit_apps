@@ -6,10 +6,18 @@ from components import utils as U
 from components import appfactory as A
 from components.downloader import FileDownloader
 
+# define app config
+APP_CONFIG: dict = dict(
+    page_title = "Conda-Forger App",
+    page_icon = ":zap:",
+    layout = "wide" if U.use_wide_layout() else "centered",
+    initial_sidebar_state = "auto",
+    menu_items = None,
+)
 
 # This must be the first Streamlit command used 
 # in your app, and must only be set once.
-st.set_page_config(**U.APP_CONFIG)
+st.set_page_config(**APP_CONFIG)
 
 Defaults = U.Defaults
 APP_CODE_BADGE = Defaults.APP_CODE_BADGE

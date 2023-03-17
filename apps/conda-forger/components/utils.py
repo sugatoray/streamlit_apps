@@ -10,13 +10,19 @@ from parse import parse, compile, Parser
 from faker import Faker
 
 
-@st.cache
+# read in environment variale "ST_USE_WIDE_LAYOUT"
+def use_wide_layout(watchvariable: str = "ST_USE_WIDE_LAYOUT", value: str = "0") -> bool:
+    # Default is False (ST_USE_WIDE_LAYOUT = "0")
+    return bool(os.environ.get(watchvariable, value) == "1")
+    
+
+@st.cache_data
 def use_debug_mode(watchvariable: str = "ST_DEBUG_MODE", value: str = "0") -> bool:
     # Default is False (ST_DEBUG_MODE = "0")
     return bool(os.environ.get(watchvariable, value) == "1")
 
 
-@st.cache
+@st.cache_data
 def is_streamlit_cloud(watchvariable: str = "ST_IS_STREAMLIT_CLOUD") -> bool:
     """If running in the Streamlit Cloud, set environment variable
     (the same as ``watchvariable``) to 1.
@@ -24,22 +30,7 @@ def is_streamlit_cloud(watchvariable: str = "ST_IS_STREAMLIT_CLOUD") -> bool:
     return bool(os.environ.get(watchvariable, "0") == "1")
 
 
-@st.cache
-def use_wide_layout(watchvariable: str = "ST_USE_WIDE_LAYOUT", value: str = "0") -> bool:
-    # Default is False (ST_USE_WIDE_LAYOUT = "0")
-    return bool(os.environ.get(watchvariable, value) == "1")
-
-
-APP_CONFIG: dict = dict(
-    page_title = "Conda-Forger App",
-    page_icon = ":zap:",
-    layout = "wide" if use_wide_layout() else "centered",
-    initial_sidebar_state = "auto",
-    menu_items = None,
-)
-
-
-@st.cache
+@st.cache_data
 @dataclass
 class Defaults:
     DEFAULT_PACKAGE_SOURCE: str = "PyPI"
